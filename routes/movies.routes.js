@@ -3,12 +3,12 @@ const router = express.Router();
 
 const mongoose = require("mongoose");
 // const isLoggedOut = require("../middleware/isLoggedOut");
-// const isLoggedIn = require("../middleware/isLoggedIn");
+const isLoggedIn = require("../middleware/isLoggedIn");
 
 const Movie = require("../models/Movie.model");
 
 //Movies list
-router.get("/listado", (req, res, next) => {
+router.get("/listado", isLoggedIn, (req, res, next) => {
 
 
     Movie
@@ -21,13 +21,13 @@ router.get("/listado", (req, res, next) => {
 
 
 //Create movie render
-router.get("/crear-pelicula", (req, res, next) => {
+router.get("/crear-pelicula", isLoggedIn, (req, res, next) => {
 
     res.render("movies/create");
 });
 
 //Create movie handler
-router.post("/crear-pelicula", (req, res, next) => {
+router.post("/crear-pelicula", isLoggedIn, (req, res, next) => {
     const { title, director, year, image, latitude, longitude } = req.body
 
     const location = {

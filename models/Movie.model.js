@@ -17,6 +17,7 @@ const movieSchema = new Schema(
       },
       coordinates: [Number]
     }
+
   },
 
   {
