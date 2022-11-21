@@ -48,6 +48,25 @@ router.post("/crear-pelicula", isLoggedIn, (req, res, next) => {
 
 //Movies details
 
+router.get("/detalles/:pelicula_id", isLoggedIn, (req, res, next) => {
+
+
+    const { pelicula_id } = req.params
+    // console.log({ isPm: req.session.currentUser.role })
+
+    Movie
+        .findById(pelicula_id)
+        .then(movieId => {
+            res.render('movies/details', {
+                movieId,
+                isADMIN: req.session.currentUser.role === 'ADMIN'
+            })
+        })
+        .catch(err => console.log(err))
+
+
+})
+
 
 
 
