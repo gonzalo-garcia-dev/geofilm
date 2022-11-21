@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 
 const Movie = require("../models/Movie.model");
 
-
+//Movies list
 router.get("/listado", (req, res, next) => {
 
 
@@ -40,6 +40,8 @@ router.post("/crear-pelicula", (req, res, next) => {
         .then(() => res.redirect('/listado'))
         .catch(err => console.log(err))
 });
+
+//Movies details
 
 
 
