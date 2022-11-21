@@ -37,7 +37,9 @@ router.post("/crear-pelicula", isLoggedIn, (req, res, next) => {
 
     Movie
         .create({ title, director, year, image, location })
-        .then(() => res.redirect('/listado'))
+        .then(movie => {
+            res.redirect(`/movie/detalle/${movie._id}`)
+        })
         .catch(err => console.log(err))
 });
 

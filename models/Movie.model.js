@@ -16,8 +16,16 @@ const movieSchema = new Schema(
         type: String
       },
       coordinates: [Number]
+<<<<<<< HEAD
     }
 
+=======
+    },
+    user: [{
+      type: mongoose.Types.ObjectId,
+      ref: 'User'
+    }]
+>>>>>>> dd246e9013ed1ba383bf94ff8b829dd7c1022ebb
   },
 
   {
