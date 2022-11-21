@@ -9,6 +9,7 @@ const Movie = require("../models/Movie.model");
 
 //Movies list
 router.get("/listado", isLoggedIn, (req, res, next) => {
+    console.log("user logueado", req.session.currentUser)
 
 
     Movie
@@ -28,6 +29,8 @@ router.get("/crear-pelicula", isLoggedIn, (req, res, next) => {
 
 //Create movie handler
 router.post("/crear-pelicula", isLoggedIn, (req, res, next) => {
+    let user = req.session.currentUser._id
+    console.log(user)
     const { title, director, year, image, latitude, longitude } = req.body
 
     const location = {
@@ -36,9 +39,9 @@ router.post("/crear-pelicula", isLoggedIn, (req, res, next) => {
     }
 
     Movie
-        .create({ title, director, year, image, location })
+        .create({ title, director, year, image, location, user })
         .then(movie => {
-            res.redirect(`/movie/detalle/${movie._id}`)
+            res.redirect(`/listado`)
         })
         .catch(err => console.log(err))
 });
