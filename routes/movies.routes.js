@@ -46,14 +46,7 @@ router.post("/crear-pelicula", isLoggedIn, (req, res, next) => {
         .catch(err => console.log(err))
 });
 
-<<<<<<< HEAD
-
-
-
-//Movies details
-=======
 //Movies details RENDER
->>>>>>> 4d7b1e5ba3ac6e09a6821be64e4da1ad3ee5020b
 
 router.get("/detalles/:pelicula_id", isLoggedIn, (req, res, next) => {
 
@@ -84,8 +77,6 @@ router.get("/editar-pelicula/:movie_id", isLoggedIn, (req, res, next) => {
         .catch(err => console.log(err))
 });
 
-<<<<<<< HEAD
-=======
 
 //Edit movie form post
 
@@ -102,7 +93,6 @@ router.post("/editar-pelicula/:movie_id", (req, res) => {
         .findByIdAndUpdate(movie_id, { title, director, year, image, location, user })
         .then(() => res.redirect(`/listado`))
         .catch(err => console.log(err))
->>>>>>> 4d7b1e5ba3ac6e09a6821be64e4da1ad3ee5020b
 })
 
 
