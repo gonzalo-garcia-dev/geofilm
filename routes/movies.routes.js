@@ -7,7 +7,7 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 
 const Movie = require("../models/Movie.model");
 
-//Movies list
+//Movies list RENDER
 router.get("/listado", isLoggedIn, (req, res, next) => {
     console.log("user logueado", req.session.currentUser)
 
@@ -21,13 +21,13 @@ router.get("/listado", isLoggedIn, (req, res, next) => {
 })
 
 
-//Create movie render
+//Create movie RENDER
 router.get("/crear-pelicula", isLoggedIn, (req, res, next) => {
 
     res.render("movies/create");
 });
 
-//Create movie handler
+//Create movie HANDLER
 router.post("/crear-pelicula", isLoggedIn, (req, res, next) => {
     let user = req.session.currentUser._id
     console.log(user)
@@ -46,7 +46,7 @@ router.post("/crear-pelicula", isLoggedIn, (req, res, next) => {
         .catch(err => console.log(err))
 });
 
-//Movies details
+//Movies details RENDER
 
 router.get("/detalles/:pelicula_id", isLoggedIn, (req, res, next) => {
 
@@ -63,8 +63,36 @@ router.get("/detalles/:pelicula_id", isLoggedIn, (req, res, next) => {
             })
         })
         .catch(err => console.log(err))
+})
+
+//Edit movie form render
+
+router.get("/editar-pelicula/:movie_id", isLoggedIn, (req, res, next) => {
+    const { movie_id } = req.params
+    Movie
+        .findById(movie_id)
+        .then(movie => {
+            res.render('movies/edit', movie)
+        })
+        .catch(err => console.log(err))
+});
 
 
+//Edit movie form post
+
+router.post("/editar-pelicula/:movie_id", (req, res) => {
+
+    const { title, director, year, image, latitude, longitude } = req.body
+    const { movie_id } = req.params
+    const location = {
+        type: 'Point',
+        coordinates: [latitude, longitude]
+    }
+
+    Movie
+        .findByIdAndUpdate(movie_id, { title, director, year, image, location, user })
+        .then(() => res.redirect(`/listado`))
+        .catch(err => console.log(err))
 })
 
 
