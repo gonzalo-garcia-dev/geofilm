@@ -21,8 +21,12 @@ const movieSchema = new Schema(
     user: {
       type: mongoose.Types.ObjectId,
       ref: 'User'
+<<<<<<< HEAD
     }
 
+=======
+    }]
+>>>>>>> aee39d421271c9fee992e39ec3d03855e357483a
   },
 
   {
