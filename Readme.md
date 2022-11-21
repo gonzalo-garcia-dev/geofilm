@@ -31,4 +31,6 @@ ENDPOINTS TABLE:
 |GET|api/listado|Render movies list|🎬|
 |GET|api/detalles/:id/valoracion|Rating form render|🎬|
 |POST|api/detalles/:id/valoracion|Rating form render|🎬|
+|GET|/editar-localizacion|Owner user could edit location details|--------|
+|POST|/editar-localizacion|Owner user could edit location details|--------|
 
