@@ -24,6 +24,13 @@ app.use("/", authRoutes);
 const movieRoutes = require("./routes/movies.routes");
 app.use("/", movieRoutes);
 
+const mapRoutes = require("./routes/map.routes");
+app.use("/", mapRoutes);
+
+const apiRoutes = require("./routes/api.routes");
+app.use("/api", apiRoutes);
+
+
 require("./error-handling")(app);
 
 module.exports = app;

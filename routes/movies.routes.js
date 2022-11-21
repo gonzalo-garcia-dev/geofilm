@@ -46,6 +46,9 @@ router.post("/crear-pelicula", isLoggedIn, (req, res, next) => {
         .catch(err => console.log(err))
 });
 
+
+
+
 //Movies details
 
 router.get("/detalles/:pelicula_id", isLoggedIn, (req, res, next) => {
@@ -64,8 +67,10 @@ router.get("/detalles/:pelicula_id", isLoggedIn, (req, res, next) => {
         })
         .catch(err => console.log(err))
 
-
 })
+
+
+
 
 
 
