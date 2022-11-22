@@ -40,7 +40,7 @@ router.post("/crear-pelicula", isLoggedIn, (req, res, next) => {
 
     Movie
         .create({ title, director, year, image, location, user })
-        .then(movie => {
+        .then(() => {
             res.redirect(`/listado`)
         })
         .catch(err => console.log(err))
@@ -56,6 +56,7 @@ router.get("/detalles/:pelicula_id", isLoggedIn, (req, res, next) => {
 
     Movie
         .findById(pelicula_id)
+        .populate(location)
         .then(movieId => {
             res.render('movies/details', {
                 movieId,
