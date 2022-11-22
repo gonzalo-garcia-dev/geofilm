@@ -30,7 +30,7 @@ router.get("/crear-pelicula", isLoggedIn, (req, res, next) => {
 //Create movie HANDLER
 router.post("/crear-pelicula", isLoggedIn, (req, res, next) => {
     let user = req.session.currentUser._id
-    console.log(user)
+    // console.log(user)
     const { title, director, year, image, latitude, longitude } = req.body
 
     const location = {
@@ -67,11 +67,23 @@ router.get("/detalles/:pelicula_id", isLoggedIn, (req, res, next) => {
 
 //Edit movie form render
 
-router.get("/editar-pelicula/:movie_id", isLoggedIn, (req, res, next) => {
-    const { movie_id } = req.params
+router.get("/editar-pelicula/:pelicula_id", isLoggedIn, (req, res, next) => {
+    const { pelicula_id } = req.params
     Movie
-        .findById(movie_id)
+        .findById(pelicula_id)
         .then(movie => {
+            const { title, director, year, image } = movie
+            const latitude = movie.location.coordinates[0]
+            const longitude = movie.location.coordinates[1]
+            movie = {
+                title,
+                director,
+                year,
+                image,
+                latitude,
+                longitude
+            }
+            // console.log('esta bien mi peliiii?', movie)
             res.render('movies/edit', movie)
         })
         .catch(err => console.log(err))
@@ -80,18 +92,18 @@ router.get("/editar-pelicula/:movie_id", isLoggedIn, (req, res, next) => {
 
 //Edit movie form post
 
-router.post("/editar-pelicula/:movie_id", (req, res) => {
+router.post("/editar-pelicula/:pelicula_id", isLoggedIn, (req, res, next) => {
 
+    const { pelicula_id } = req.params
     const { title, director, year, image, latitude, longitude } = req.body
-    const { movie_id } = req.params
     const location = {
         type: 'Point',
         coordinates: [latitude, longitude]
     }
 
     Movie
-        .findByIdAndUpdate(movie_id, { title, director, year, image, location, user })
-        .then(() => res.redirect(`/listado`))
+        .findByIdAndUpdate(pelicula_id, { title, director, year, image, location })
+        .then(() => res.redirect("/editar-pelicula"))
         .catch(err => console.log(err))
 })
 

@@ -5,7 +5,7 @@
     <h5 class="card-title">{{movieId.year}}</h5>
     <h5 class="card-title">{{movieId.location}}</h5>
     {{#if isADMIN}}
-    <a href="/detalles/{{movieId._id}}" class="btn btn-warning">Editar Película</a>
+    <a href="/editar-pelicula/{{movieId._id}}" class="btn btn-warning">Editar Película</a>
     <form action="/detalles/{{movieId._id}}" method="POST" style="display: inline">
         <input type="submit" value="Eliminar película" class="btn btn-danger">
     </form>
