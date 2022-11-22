@@ -56,11 +56,7 @@ router.get("/detalles/:pelicula_id", (req, res, next) => {
 
     Movie
         .findById(pelicula_id)
-<<<<<<< HEAD
-        .populate(location)
-=======
         .populate('user')
->>>>>>> 6edc800092f99cb5e83fefcf48816f9550c40e69
         .then(movieId => {
             // console.log(movieId)
             res.render('movies/details', {
