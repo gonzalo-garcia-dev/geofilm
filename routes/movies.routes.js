@@ -7,7 +7,7 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 
 const Movie = require("../models/Movie.model");
 const imdbApi = require("../services/imdb-api.service")
-const api = imdbApi()
+const api = new imdbApi()
 
 //Movies list RENDER
 router.get("/listado", isLoggedIn, (req, res, next) => {
@@ -115,16 +115,31 @@ router.post("/editar-pelicula/:pelicula_id", isLoggedIn, (req, res, next) => {
 })
 
 router.get("/buscar", isLoggedIn, (req, res, next) => {
-    // console.log("user logueado", req.session.currentUser)
-
+    const { title } = req.query
 
     api
-        .find()
-        .then(movie => {
-            res.render('movies/list', { movie })
+        .findAllMovies(title)
+        .then((response) => {
+            console.log(response.data)
+            res.render('search-movies', { movies: response.data.results })
         })
         .catch(err => console.log(err))
 })
+
+
+router.get("/pelicula/crear-localizacion/:movieId", isLoggedIn, (req, res, next) => {
+    const { movieId } = req.params
+
+    api
+        .getOneMovie(movieId)
+        .then(movieId => {
+            console.log("hola soy", movieId)
+            res.render('prueba', { movieId })
+        })
+        .catch(err => console.log(err))
+})
+
+
 
 
 
