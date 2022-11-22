@@ -4,14 +4,10 @@ const router = express.Router();
 const mongoose = require("mongoose");
 // const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
+
 const Movie = require("../models/Movie.model");
-const imdbApi = require('../services/imdb-api.service')
-const api = new imdbApi()
-
-
-
-
-
+const imdbApi = require("../services/imdb-api.service")
+const api = imdbApi()
 
 //Movies list RENDER
 router.get("/listado", isLoggedIn, (req, res, next) => {
@@ -52,9 +48,7 @@ router.post("/crear-pelicula", isLoggedIn, (req, res, next) => {
         .catch(err => console.log(err))
 });
 
-
-
-
+//Movies details RENDER
 
 router.get("/detalles/:pelicula_id", (req, res, next) => {
 
@@ -95,6 +89,7 @@ router.get("/editar-pelicula/:pelicula_id", isLoggedIn, (req, res, next) => {
                 longitude
             }
 
+            // console.log('esta bien mi peliiii?', movie)
             res.render('movies/edit', movie)
         })
         .catch(err => console.log(err))
@@ -104,7 +99,7 @@ router.get("/editar-pelicula/:pelicula_id", isLoggedIn, (req, res, next) => {
 //Edit movie form post
 
 router.post("/editar-pelicula/:pelicula_id", isLoggedIn, (req, res, next) => {
-
+    console.log('entro aquí')
 
     const { pelicula_id } = req.params
     const { title, director, year, image, latitude, longitude } = req.body
@@ -119,42 +114,17 @@ router.post("/editar-pelicula/:pelicula_id", isLoggedIn, (req, res, next) => {
         .catch(err => console.log(err))
 })
 
+router.get("/buscar", isLoggedIn, (req, res, next) => {
+    // console.log("user logueado", req.session.currentUser)
 
-
-
-router.get("/buscar", (req, res, next) => {
-    const { title } = req.query
 
     api
-        .findAllMovies(title)
-        .then(response => {
-            console.log(response.data)
-            res.render('search-movies', { movies: response.data.results })
+        .find()
+        .then(movie => {
+            res.render('movies/list', { movie })
         })
         .catch(err => console.log(err))
-
 })
-
-router.get("/pelicula/crear-localizacion/:movieId ", (req, res, next) => {
-
-    const { movieId } = req.params
-    console.log(req.params)
-    // const { movieId } = req.params
-
-    // api
-    //     .getOneMovie(movieId)
-    //     .then(response => {
-    //         console.log(response.data)
-    //         res.render('prueba', { movies: response.data.results })
-    //     })
-    //     .catch(err => console.log(err))
-
-
-})
-
-
-
-
 
 
 
