@@ -1,15 +1,16 @@
 <div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
+    <img src="#" class="card-img-top" alt="hola">
     <div class="card-body">
         <h5 class="card-title">{{movieId.title}}</h5>
         <h7 class="card-title">{{movieId.director}}</h7>
         <h5 class="card-title">{{movieId.year}}</h5>
-        <h5 class="card-title">{{movieId.location}}</h5>
+        <h5 class="card-title">{{movieId.location.coordinates.[0]}}</h5>
+        <h5 class="card-title">{{movieId.location.coordinates.[1]}}</h5>
         <hr>
         {{#if isADMIN}}
-        <a href="/detalles/{{movieId._id}}" class="btn btn-warning">Editar Película</a>
+        <a href="/editar-pelicula/{{movieId._id}}" class="btn btn-warning">Editar Película</a>
         <hr>
-        <form action="/detalles/{{movieId._id}}" method="POST" style="display: inline">
+        <form action="/eliminar-pelicula/{{movieId._id}}" method="POST" style="display: inline">
             <input type="submit" value="Eliminar película" class="btn btn-danger">
         </form>
         {{/if}}

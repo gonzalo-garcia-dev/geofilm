@@ -9,7 +9,7 @@ const Movie = require("../models/Movie.model");
 
 //Movies list RENDER
 router.get("/listado", isLoggedIn, (req, res, next) => {
-    console.log("user logueado", req.session.currentUser)
+    // console.log("user logueado", req.session.currentUser)
 
 
     Movie
@@ -48,7 +48,7 @@ router.post("/crear-pelicula", isLoggedIn, (req, res, next) => {
 
 //Movies details RENDER
 
-router.get("/detalles/:pelicula_id", isLoggedIn, (req, res, next) => {
+router.get("/detalles/:pelicula_id", (req, res, next) => {
 
 
     const { pelicula_id } = req.params
@@ -56,7 +56,9 @@ router.get("/detalles/:pelicula_id", isLoggedIn, (req, res, next) => {
 
     Movie
         .findById(pelicula_id)
+        .populate('user')
         .then(movieId => {
+            // console.log(movieId)
             res.render('movies/details', {
                 movieId,
                 isADMIN: req.session.currentUser.role === 'ADMIN'
@@ -72,10 +74,11 @@ router.get("/editar-pelicula/:pelicula_id", isLoggedIn, (req, res, next) => {
     Movie
         .findById(pelicula_id)
         .then(movie => {
-            const { title, director, year, image } = movie
+            const { _id, title, director, year, image } = movie
             const latitude = movie.location.coordinates[0]
             const longitude = movie.location.coordinates[1]
             movie = {
+                _id,
                 title,
                 director,
                 year,
@@ -83,6 +86,7 @@ router.get("/editar-pelicula/:pelicula_id", isLoggedIn, (req, res, next) => {
                 latitude,
                 longitude
             }
+
             // console.log('esta bien mi peliiii?', movie)
             res.render('movies/edit', movie)
         })
@@ -93,6 +97,7 @@ router.get("/editar-pelicula/:pelicula_id", isLoggedIn, (req, res, next) => {
 //Edit movie form post
 
 router.post("/editar-pelicula/:pelicula_id", isLoggedIn, (req, res, next) => {
+    console.log('entro aquí')
 
     const { pelicula_id } = req.params
     const { title, director, year, image, latitude, longitude } = req.body
@@ -103,7 +108,7 @@ router.post("/editar-pelicula/:pelicula_id", isLoggedIn, (req, res, next) => {
 
     Movie
         .findByIdAndUpdate(pelicula_id, { title, director, year, image, location })
-        .then(() => res.redirect("/editar-pelicula"))
+        .then(() => res.redirect(`/detalles/${pelicula_id}`))
         .catch(err => console.log(err))
 })
 
