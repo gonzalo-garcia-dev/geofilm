@@ -1,18 +1,13 @@
 const express = require("express");
 const router = express.Router();
-
 const mongoose = require("mongoose");
-// const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
-
 const Movie = require("../models/Movie.model");
 const imdbApi = require("../services/imdb-api.service")
 const api = new imdbApi()
 
 //Movies list RENDER
 router.get("/listado", isLoggedIn, (req, res, next) => {
-    // console.log("user logueado", req.session.currentUser)
-
 
     Movie
         .find()
@@ -23,16 +18,11 @@ router.get("/listado", isLoggedIn, (req, res, next) => {
 })
 
 
-//Create movie RENDER
-router.get("/crear-pelicula", isLoggedIn, (req, res, next) => {
-
-    res.render("movies/create");
-});
 
 //Create movie HANDLER
 router.post("/crear-pelicula", isLoggedIn, (req, res, next) => {
+
     let user = req.session.currentUser._id
-    // console.log(user)
     const { title, director, year, image, latitude, longitude } = req.body
 
     const location = {
@@ -52,15 +42,12 @@ router.post("/crear-pelicula", isLoggedIn, (req, res, next) => {
 
 router.get("/detalles/:pelicula_id", (req, res, next) => {
 
-
     const { pelicula_id } = req.params
-    // console.log({ isPm: req.session.currentUser.role })
 
     Movie
         .findById(pelicula_id)
         .populate('user')
         .then(movieId => {
-            // console.log(movieId)
             res.render('movies/details', {
                 movieId,
                 isADMIN: req.session.currentUser.role === 'ADMIN'
@@ -72,6 +59,7 @@ router.get("/detalles/:pelicula_id", (req, res, next) => {
 //Edit movie form render
 
 router.get("/editar-pelicula/:pelicula_id", isLoggedIn, (req, res, next) => {
+
     const { pelicula_id } = req.params
     Movie
         .findById(pelicula_id)
@@ -89,7 +77,6 @@ router.get("/editar-pelicula/:pelicula_id", isLoggedIn, (req, res, next) => {
                 longitude
             }
 
-            // console.log('esta bien mi peliiii?', movie)
             res.render('movies/edit', movie)
         })
         .catch(err => console.log(err))
@@ -121,11 +108,10 @@ router.get("/buscar", isLoggedIn, (req, res, next) => {
         .findAllMovies(title)
         .then((response) => {
             console.log(response.data)
-            res.render('search-movies', { movies: response.data.results })
+            res.render('movies/search-movies', { movies: response.data.results })
         })
         .catch(err => console.log(err))
 })
-
 
 router.get("/pelicula/crear-localizacion/:movieId", isLoggedIn, (req, res, next) => {
     const { movieId } = req.params
@@ -133,18 +119,10 @@ router.get("/pelicula/crear-localizacion/:movieId", isLoggedIn, (req, res, next)
     api
         .getOneMovie(movieId)
         .then(movieId => {
-            console.log("hola soy", movieId)
-            res.render('prueba', { movieId })
+            res.render('movies/create', { movie: movieId.data })
         })
         .catch(err => console.log(err))
 })
-
-
-
-
-
-
-
 
 
 
