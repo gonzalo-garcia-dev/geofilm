@@ -1,7 +1,45 @@
-<form action="/peliculas/buscar" method="GET">
-    <div class="mb-3">
-        <label for="title" class="form-label">Título</label>
-        <input type="text" class="form-control" id="title" name="title">
+<header>
+    <div id="intro" class="bg-image shadow-2-strong">
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.8);">
+            <div class="container d-flex align-items-center justify-content-center text-center h-100">
+                <div class="text-white">
+                    <h1 class="mb-3">Geofilm</h1>
+                    <h5 class="mb-4">De cinéfilos, para cinéfilos</h5>
+                    <a class="btn btn-outline-light btn-lg m-2" href="/registro" role="button" rel="nofollow"
+                        target="_blank">Darme de alta</a>
+                    <a class="btn btn-outline-light btn-lg m-2" href="/inicio-sesion" target="_blank"
+                        role="button">Iniciar
+                        sesión</a>
+                    <hr>
+                    <form action="/peliculas/buscar" method="GET">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">¡Busca tu película!</label>
+                            <input type="text" class="btn btn-outline-light btn-lg m-2" id="title" name="title">
+                        </div>
+                        <button type="submit" class="btn btn-outline-light btn-lg m-2">Buscar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <button type="submit">Buscar Película</button>
-</form>
+</header>
+
+
+
+
+
+
+{{!-- <div class="has-bg-img">
+
+    <h1>GEOFILM</h1>
+    <h2> De cinéfilos, para cinéfilos</h2>
+
+    <form action="/peliculas/buscar" method="GET">
+        <div class="mb-3">
+            <label for="title" class="form-label">Título</label>
+            <input type="text" class="form-control" id="title" name="title">
+        </div>
+        <button type="submit">Buscar Película</button>
+    </form>
+
+</div> --}}
