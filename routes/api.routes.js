@@ -8,7 +8,7 @@ router.get("/list", isLoggedIn, (req, res, next) => {
     Movie
         .find()
         .then(movies => res.json(movies))
-        .catch(err => console.log(err))
+        .catch(error => { next(error) })
 })
 
 module.exports = router

@@ -21,7 +21,14 @@ const movieSchema = new Schema(
     user: {
       type: mongoose.Types.ObjectId,
       ref: 'User'
-    }
+    },
+
+    review: [{
+      type: mongoose.Types.ObjectId,
+      ref: 'Review'
+    }]
+
+
 
   },
 

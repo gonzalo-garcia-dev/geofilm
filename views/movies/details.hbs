@@ -6,6 +6,29 @@
         <h5 class="card-title">{{movie.year}}</h5>
         <h5 class="card-title">{{movie.location.coordinates.[0]}}</h5>
         <h5 class="card-title">{{movie.location.coordinates.[1]}}</h5>
+
+        <form action="/peliculas/detalles/{{movie._id}}/valoracion" method="POST">
+            <div class="mb-3">
+
+                <label>Valoración
+                    <select name="rating">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+
+                    </select>
+                </label>
+
+            </div>
+            <div class="mb-3">
+                <label for="comment" class="form-label">Comentario</label>
+                <input type="text" class="form-control" id="comment" name="comment">
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-dark">Valorar</button>
+            </div>
+
+        </form>
+        <hr>
         <hr>
         {{#if isADMIN}}
         <a href="/peliculas/editar-pelicula/{{movie._id}}" class="btn btn-warning">Editar Película</a>
@@ -16,3 +39,8 @@
         {{/if}}
     </div>
 </div>
+{{#each movie.review}}
+<h1>Puntuacion:{{rating}}</h1>
+<h1>Comentario:{{comment}}</h1>
+<h1>Autor:{{author.username}}</h1>
+{{/each}}

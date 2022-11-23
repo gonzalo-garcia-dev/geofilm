@@ -4,12 +4,27 @@ const Schema = mongoose.Schema
 const reviewSchema = new Schema(
   {
     rating: Number,
-    comment: String
+    comment: String,
+
+    author: {
+      type: mongoose.Types.ObjectId,
+      ref: 'User'
+    },
+
+    movieId: {
+      type: mongoose.Types.ObjectId,
+      ref: 'Movie'
+    },
+
+
   },
+
+
 
   {
     timestamps: true
   }
+
 
 );
 
