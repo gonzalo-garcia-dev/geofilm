@@ -11,6 +11,7 @@ router.get("/listado", isLoggedIn, (req, res, next) => {
 
     Movie
         .find()
+        // .select({title: 1})
         .then(movie => {
             res.render('movies/list', { movie })
         })
@@ -22,7 +23,7 @@ router.get("/listado", isLoggedIn, (req, res, next) => {
 //Create movie HANDLER
 router.post("/crear-pelicula", isLoggedIn, (req, res, next) => {
 
-    let user = req.session.currentUser._id
+    let { _id: user } = req.session.currentUser
     const { title, director, year, image, latitude, longitude } = req.body
 
     const location = {
@@ -33,23 +34,23 @@ router.post("/crear-pelicula", isLoggedIn, (req, res, next) => {
     Movie
         .create({ title, director, year, image, location, user })
         .then(() => {
-            res.redirect(`/listado`)
+            res.redirect(`/peliculas/listado`)
         })
         .catch(err => console.log(err))
 });
 
 //Movies details RENDER
 
-router.get("/detalles/:pelicula_id", (req, res, next) => {
+router.get("/detalles/:movie_id", (req, res, next) => {
 
-    const { pelicula_id } = req.params
+    const { movie_id: id } = req.params
 
     Movie
-        .findById(pelicula_id)
+        .findById(id)
         .populate('user')
-        .then(movieId => {
+        .then(movie => {
             res.render('movies/details', {
-                movieId,
+                movie,
                 isADMIN: req.session.currentUser.role === 'ADMIN'
             })
         })
@@ -58,11 +59,11 @@ router.get("/detalles/:pelicula_id", (req, res, next) => {
 
 //Edit movie form render
 
-router.get("/editar-pelicula/:pelicula_id", isLoggedIn, (req, res, next) => {
+router.get("/editar-pelicula/:movie_id", isLoggedIn, (req, res, next) => {
 
-    const { pelicula_id } = req.params
+    const { movie_id: id } = req.params
     Movie
-        .findById(pelicula_id)
+        .findById(id)
         .then(movie => {
             const { _id, title, director, year, image } = movie
             const latitude = movie.location.coordinates[0]
@@ -85,10 +86,9 @@ router.get("/editar-pelicula/:pelicula_id", isLoggedIn, (req, res, next) => {
 
 //Edit movie form post
 
-router.post("/editar-pelicula/:pelicula_id", isLoggedIn, (req, res, next) => {
-    console.log('entro aquí')
+router.post("/editar-pelicula/:movie_id", isLoggedIn, (req, res, next) => {
 
-    const { pelicula_id } = req.params
+    const { movie_id: id } = req.params
     const { title, director, year, image, latitude, longitude } = req.body
     const location = {
         type: 'Point',
@@ -96,10 +96,12 @@ router.post("/editar-pelicula/:pelicula_id", isLoggedIn, (req, res, next) => {
     }
 
     Movie
-        .findByIdAndUpdate(pelicula_id, { title, director, year, image, location })
-        .then(() => res.redirect(`/detalles/${pelicula_id}`))
+        .findByIdAndUpdate(id, { title, director, year, image, location })
+        .then(() => res.redirect(`/peliculas/detalles/${id}`))
         .catch(err => console.log(err))
 })
+
+//Search movie from api
 
 router.get("/buscar", isLoggedIn, (req, res, next) => {
     const { title } = req.query
@@ -107,19 +109,20 @@ router.get("/buscar", isLoggedIn, (req, res, next) => {
     api
         .findAllMovies(title)
         .then((response) => {
-            console.log(response.data)
             res.render('movies/search-movies', { movies: response.data.results })
         })
         .catch(err => console.log(err))
 })
 
-router.get("/pelicula/crear-localizacion/:movieId", isLoggedIn, (req, res, next) => {
-    const { movieId } = req.params
+//Select movie from api
+
+router.get("/crear-localizacion/:movieId", isLoggedIn, (req, res, next) => {
+    const { movieId: id } = req.params
 
     api
-        .getOneMovie(movieId)
-        .then(movieId => {
-            res.render('movies/create', { movie: movieId.data })
+        .getOneMovie(id)
+        .then(movie => {
+            res.render('movies/create', { movie: movie.data })
         })
         .catch(err => console.log(err))
 })

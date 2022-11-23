@@ -1,22 +1,18 @@
-require("dotenv").config();
+require("dotenv").config()
 
-require("./db");
+require("./db")
 
-const express = require("express");
+const express = require("express")
+const app = express()
 
-const hbs = require("hbs");
+require("./config")(app)
 
-const app = express();
+const capitalize = require("./utils/capitalize")
+const projectName = "Geogilm"
 
-require("./config")(app);
-
-const capitalize = require("./utils/capitalize");
-const projectName = "Geogilm";
-
-app.locals.appTitle = `${capitalize(projectName)} created with IronLauncher`;
+app.locals.appTitle = `${capitalize(projectName)} created with IronLauncher`
 
 require('./routes')(app)
-require("./error-handling")(app);
+require("./error-handling")(app)
 
-
-module.exports = app;
+module.exports = app

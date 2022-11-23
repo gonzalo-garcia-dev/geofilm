@@ -1,8 +1,8 @@
-const express = require("express");
-const router = express.Router();
-const mongoose = require("mongoose");
-const isLoggedIn = require("../middleware/isLoggedIn");
-const Movie = require("../models/Movie.model");
+const express = require("express")
+const router = express.Router()
+const mongoose = require("mongoose")
+const isLoggedIn = require("../middleware/isLoggedIn")
+const Movie = require("../models/Movie.model")
 
 
 router.get('/mapa', isLoggedIn, (req, res, next) => {
@@ -12,4 +12,4 @@ router.get('/mapa', isLoggedIn, (req, res, next) => {
 
 
 
-module.exports = router;
+module.exports = router

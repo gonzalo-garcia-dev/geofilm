@@ -1,17 +1,17 @@
 module.exports = app => {
 
-    const indexRoutes = require("./index.routes");
-    app.use("/", indexRoutes);
+    const indexRoutes = require("./index.routes")
+    app.use("/", indexRoutes)
 
-    const authRoutes = require("./auth.routes");
-    app.use("/", authRoutes);
+    const authRoutes = require("./auth.routes")
+    app.use("/", authRoutes)
 
-    const movieRoutes = require("./movies.routes");
-    app.use("/", movieRoutes);
+    const movieRoutes = require("./movies.routes")
+    app.use("/peliculas", movieRoutes)
 
-    const mapRoutes = require("./map.routes");
-    app.use("/", mapRoutes);
+    const mapRoutes = require("./map.routes")
+    app.use("/", mapRoutes)
 
-    const apiRoutes = require("./api.routes");
-    app.use("/api", apiRoutes);
+    const apiRoutes = require("./api.routes")
+    app.use("/api", apiRoutes)
 }

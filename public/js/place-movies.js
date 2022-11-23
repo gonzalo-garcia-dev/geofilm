@@ -4,15 +4,12 @@ let myMap
 function init() {
     renderMap()
     getMovies()
-
 }
 
 
 function getMovies() {
-
-
     axios
-        .get('/api/listado')
+        .get('/api/list')
         .then(response => setMarkers(response.data))
         .catch(err => console.log(err))
 }

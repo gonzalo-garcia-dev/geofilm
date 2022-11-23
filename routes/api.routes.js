@@ -1,14 +1,13 @@
-const express = require("express");
-const router = express.Router();
-const mongoose = require("mongoose");
-const isLoggedIn = require("../middleware/isLoggedIn");
-const Movie = require("../models/Movie.model");
+const express = require("express")
+const router = express.Router()
+const isLoggedIn = require("../middleware/isLoggedIn")
+const Movie = require("../models/Movie.model")
 
-router.get("/listado", (req, res, next) => {
+router.get("/list", isLoggedIn, (req, res, next) => {
 
     Movie
         .find()
-        .then(movie => res.json(movie))
+        .then(movies => res.json(movies))
         .catch(err => console.log(err))
 })
 

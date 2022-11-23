@@ -1,36 +1,36 @@
-const express = require("express");
-const router = express.Router();
-const bcrypt = require("bcrypt");
-const mongoose = require("mongoose");
-const saltRounds = 10;
-const User = require("../models/User.model");
-const isLoggedOut = require("../middleware/isLoggedOut");
-const isLoggedIn = require("../middleware/isLoggedIn");
+const express = require("express")
+const router = express.Router()
+const bcrypt = require("bcrypt")
+const mongoose = require("mongoose")
+const saltRounds = 10
+const User = require("../models/User.model")
+const isLoggedOut = require("../middleware/isLoggedOut")
+const isLoggedIn = require("../middleware/isLoggedIn")
 
 
 //Registrar Usuaria
 router.get("/registro", isLoggedOut, (req, res) => {
-  res.render("auth/signup");
-});
+  res.render("auth/signup")
+})
 
 router.post("/registro", isLoggedOut, (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password } = req.body
 
   if (username === "" || email === "" || password === "") {
     res.status(400).render("auth-signup", {
       errorMessage:
         "Todos los campos son obligatorios. Por favor, introduzca su nombre de usuario y contraseña.",
-    });
+    })
 
-    return;
+    return
   }
 
   if (password.length < 6) {
     res.status(400).render("auth/signup", {
       errorMessage: "Su contraseña debe tener al menos 6 caracteres.",
-    });
+    })
 
-    return;
+    return
   }
 
 
@@ -39,49 +39,48 @@ router.post("/registro", isLoggedOut, (req, res) => {
     .genSalt(saltRounds)
     .then((salt) => bcrypt.hash(password, salt))
     .then((hashedPassword) => {
-      return User.create({ username, email, password: hashedPassword });
+      return User.create({ username, email, password: hashedPassword })
     })
     .then((user) => {
-      res.redirect("/inicio-sesion");
+      res.redirect("/inicio-sesion")
     })
     .catch((error) => {
       if (error instanceof mongoose.Error.ValidationError) {
 
-        res.status(500).render("auth-signup", { errorMessage: error.message });
+        res.status(500).render("auth-signup", { errorMessage: error.message })
       } else if (error.code === 11000) {
         res.status(500).render("auth-signup", {
           errorMessage:
             "Este email ya está registrado, por favor, introduzca un email válido",
-        });
+        })
       } else {
-        next(error);
+        next(error)
       }
-    });
-});
+    })
+})
 
 // GET //inicio-sesion
 router.get("/inicio-sesion", isLoggedOut, (req, res) => {
-  res.render("auth/login");
-});
+  res.render("auth/login")
+})
 
 // POST //inicio-sesion
 router.post("/inicio-sesion", isLoggedOut, (req, res, next) => {
-  const { username, email, password } = req.body;
+  const { username, email, password } = req.body
 
-  // Check that username, email, and password are provided
   if (username === "" || email === "" || password === "") {
     res.status(400).render("auth/login", {
       errorMessage:
         "Todos los campos son obligatorios. Por favor, introduzca su nombre de usuario y contraseña.",
-    });
+    })
 
-    return;
+    return
   }
 
   if (password.length < 6) {
     return res.status(400).render("auth-login", {
       errorMessage: "Su contraseña debe tener al menos 6 caracteres.",
-    });
+    })
   }
 
   User
@@ -90,8 +89,8 @@ router.post("/inicio-sesion", isLoggedOut, (req, res, next) => {
       if (!user) {
         res
           .status(400)
-          .render("auth/login", { errorMessage: "Email incorrecto" });
-        return;
+          .render("auth/login", { errorMessage: "Email incorrecto" })
+        return
       }
 
       bcrypt
@@ -100,30 +99,30 @@ router.post("/inicio-sesion", isLoggedOut, (req, res, next) => {
           if (!isSamePassword) {
             res
               .status(400)
-              .render("auth/login", { errorMessage: "Contraseña incorrecta." });
-            return;
+              .render("auth/login", { errorMessage: "Contraseña incorrecta." })
+            return
           }
 
-          req.session.currentUser = user.toObject();
-          delete req.session.currentUser.password;
+          req.session.currentUser = user.toObject()
+          delete req.session.currentUser.password
 
-          res.redirect("/mi-perfil");
+          res.redirect("/mi-perfil")
         })
-        .catch((err) => next(err)); // In this case, we send error handling to the error handling middleware.
+        .catch((err) => next(err))
     })
-    .catch((err) => next(err));
-});
+    .catch((err) => next(err))
+})
 
 // GET //logout
 router.get("/logout", isLoggedIn, (req, res) => {
   req.session.destroy((err) => {
     if (err) {
-      res.status(500).render("auth/logout", { errorMessage: err.message });
-      return;
+      res.status(500).render("auth/logout", { errorMessage: err.message })
+      return
     }
 
-    res.redirect("/");
-  });
-});
+    res.redirect("/")
+  })
+})
 
-module.exports = router;
+module.exports = router
