@@ -35,6 +35,12 @@ module.exports = (app) => {
       secret: process.env.SESSION_SECRET || "super hyper secret key",
       resave: false,
       saveUninitialized: false,
+      cookie: {
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        maxAge: 600000
+      },
       store: MongoStore.create({
         mongoUrl: MONGO_URI,
       }),
