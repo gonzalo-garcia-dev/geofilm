@@ -26,7 +26,8 @@ function setMarkers(movies) {
         new google.maps.Marker({
             map: myMap,
             position: { lat, lng },
-            title: elm.title
+            title: elm.title,
+            animation: google.maps.Animation.DROP
 
         })
 

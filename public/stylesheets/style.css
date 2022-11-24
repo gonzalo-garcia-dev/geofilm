@@ -1,6 +1,6 @@
 #myMap {
   height: 100vh;
-  background-color: red;
+
 }
 
 img {
@@ -21,4 +21,14 @@ img {
 
 .btn-warning {
   --bs-btn-bg: rgb(59, 166, 98);
+}
+
+.col-md-3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  justify-content: space-between;
+  padding-inline: 20px;
+  margin-top: 20px
 }

@@ -131,9 +131,9 @@ router.get("/mi-perfil", isLoggedIn, (req, res, next) => {
 
   User
     .findOne(username)
-    // .select({title: 1})
     .then(user => {
-      res.render('user/profile', { user })
+      req.session.currentUser = user
+      res.render("user/profile", { user })
     })
     .catch(error => { next(error) })
 })
