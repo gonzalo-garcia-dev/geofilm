@@ -5,6 +5,7 @@
 
 img {
   max-width: 100px;
+
 }
 
 #intro {
@@ -16,6 +17,7 @@ img {
 
 .btn-danger {
   --bs-btn-bg: rgb(171, 14, 14);
+
 
 }
 
@@ -31,4 +33,10 @@ img {
   justify-content: space-between;
   padding-inline: 20px;
   margin-top: 20px
+}
+
+.card-img-top {
+  width: 250px;
+
+
 }

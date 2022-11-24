@@ -5,24 +5,26 @@
                 <div class="col-md-4">
                     <img src="{{movie.image}}" class="img-fluid rounded-start" alt="{{title.image}}">
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <div class="card-body">
-                        <h1 class="card-title">{{movie.title}}</h1>
-                        <h7 class="card-title">{{movie.director}}</h7>
-                        <h5 class="card-title">{{movie.year}}</h5>
-                        <p><b>Sinópsis</b>: {{movie.plotLocal}}</p>
-                        <p><b>Premios</b>: {{movie.awards}}</p>
-                        <p><b>Duración</b>: {{movie.runtimeStr}}</p>
-                        <p><b>Fecha de estreno</b>: {{movie.releaseDate}}</p>
-                        <p><b>Guionistas</b>: {{movie.writers}}</p>
-                        <p><b>Estrellas principales</b>: {{movie.stars}}</p>
-                        <p><b>Géneros</b>: {{movie.genres}}</p>
-                        <p><b>Valoración de los usuarios</b>: {{movie.imDbRating}}</p>
-                        <p><b>Presupuesto</b>: {{movie.boxOffice.budget}}</p>
-                        <p><b>Recaudado hasta la fecha</b>: {{movie.boxOffice.cumulativeWorldwideGross}}</p>
-                        {{!-- <h5 class="card-title">{{movie.location.coordinates.[0]}}</h5>
-                        <h5 class="card-title">{{movie.location.coordinates.[1]}}</h5> --}}
 
+                        {{#with movie}}
+                        <h1 class="card-title">{{title}}</h1>
+                        <h7 class="card-title">{{director}}</h7>
+                        <h5 class="card-title">{{year}}</h5>
+                        <p><b>Sinópsis</b>: {{plotLocal}}</p>
+                        <p><b>Premios</b>: {{awards}}</p>
+                        <p><b>Duración</b>: {{runtimeStr}}</p>
+                        <p><b>Fecha de estreno</b>: {{releaseDate}}</p>
+                        <p><b>Guionistas</b>: {{writers}}</p>
+                        <p><b>Estrellas principales</b>: {{stars}}</p>
+                        <p><b>Géneros</b>: {{genres}}</p>
+                        <p><b>Valoración de los usuarios</b>: {{imDbRating}}</p>
+                        <p><b>Presupuesto</b>: {{boxOffice.budget}}</p>
+                        <p><b>Recaudado hasta la fecha</b>: {{boxOffice.cumulativeWorldwideGross}}</p>
+                        {{!-- <h5 class="card-title">{{location.coordinates.[0]}}</h5>
+                        <h5 class="card-title">{{location.coordinates.[1]}}</h5> --}}
+                        {{/with}}
                         <form action="/peliculas/detalles/{{movie._id}}/valoracion" method="POST">
                             <div class="mb-3">
                                 <label>Valoración
@@ -62,6 +64,7 @@
 
 <div class="container mt-3">
     <h2 class="comentario">Comentarios</h2>
+    <hr>
     {{#each movie.review}}
     <h5 class="card-title">{{author.username}}</h5>
     <h6 class="card-subtitle mb-2 text-muted">Puntuacion:{{rating}}</h6>

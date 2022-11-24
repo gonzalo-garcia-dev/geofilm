@@ -6,6 +6,7 @@ const saltRounds = 10
 const User = require("../models/User.model")
 const isLoggedOut = require("../middleware/isLoggedOut")
 const isLoggedIn = require("../middleware/isLoggedIn")
+const Movie = require('../models/Movie.model')
 
 
 //Registrar Usuaria
@@ -115,6 +116,7 @@ router.post("/inicio-sesion", isLoggedOut, (req, res, next) => {
 
 // GET //logout
 router.get("/logout", isLoggedIn, (req, res) => {
+
   req.session.destroy((err) => {
     if (err) {
       res.status(500).render("auth/logout", { errorMessage: err.message })
@@ -127,13 +129,18 @@ router.get("/logout", isLoggedIn, (req, res) => {
 
 router.get("/mi-perfil", isLoggedIn, (req, res, next) => {
 
-  const { username } = req.body
-
+  const currentUser = req.session.currentUser.username
+  const currentUserId = req.session.currentUser._id
+  let findUser
   User
-    .findOne(username)
+    .findOne({ username: currentUser })
     .then(user => {
-      req.session.currentUser = user
-      res.render("user/profile", { user })
+      findUser = user
+      console.log('soy el usuario encontrado!', user)
+      return Movie.find({ user: currentUserId })
+    })
+    .then((movies) => {
+      res.render("user/profile", { findUser, movies })
     })
     .catch(error => { next(error) })
 })
