@@ -1,46 +1,54 @@
-<div class="card" style="width: 18rem;">
-    <img src="{{movie.image}}" class="card-img-top" alt="hola">
-    <div class="card-body">
-        <h5 class="card-title">{{movie.title}}</h5>
-        <h7 class="card-title">{{movie.director}}</h7>
-        <h5 class="card-title">{{movie.year}}</h5>
-        <h5 class="card-title">{{movie.location.coordinates.[0]}}</h5>
-        <h5 class="card-title">{{movie.location.coordinates.[1]}}</h5>
+<div class="row d-flex justify-content-center">
+    <div class="col-md-6">
+        <div class="card mb-3" style="max-width: 800px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{movie.image}}" class="img-fluid rounded-start" alt="{{title.image}}">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h1 class="card-title">{{movie.title}}</h1>
+                        <h7 class="card-title">{{movie.director}}</h7>
+                        <h5 class="card-title">{{movie.year}}</h5>
+                        {{!-- <h5 class="card-title">{{movie.location.coordinates.[0]}}</h5>
+                        <h5 class="card-title">{{movie.location.coordinates.[1]}}</h5> --}}
 
-        <form action="/peliculas/detalles/{{movie._id}}/valoracion" method="POST">
-            <div class="mb-3">
-
-                <label>Valoración
-                    <select name="rating">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-
-                    </select>
-                </label>
-
+                        <form action="/peliculas/detalles/{{movie._id}}/valoracion" method="POST">
+                            <div class="mb-3">
+                                <label>Valoración
+                                    <select name="rating">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="comment" class="form-label">Comentario</label>
+                                <input type="text" class="form-control" id="comment" name="comment">
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-dark">Valorar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="comment" class="form-label">Comentario</label>
-                <input type="text" class="form-control" id="comment" name="comment">
-            </div>
-            <div class="d-grid">
-                <button type="submit" class="btn btn-dark">Valorar</button>
-            </div>
-
-        </form>
-        <hr>
-        <hr>
-        {{#if isADMIN}}
-        <a href="/peliculas/editar-pelicula/{{movie._id}}" class="btn btn-warning">Editar Película</a>
-        <hr>
-        <form action="/peliculas/eliminar-pelicula/{{movie._id}}" method="POST" style="display: inline">
-            <input type="submit" value="Eliminar película" class="btn btn-danger">
-        </form>
-        {{/if}}
+        </div>
     </div>
 </div>
-{{#each movie.review}}
-<h1>Puntuacion:{{rating}}</h1>
-<h1>Comentario:{{comment}}</h1>
-<h1>Autor:{{author.username}}</h1>
-{{/each}}
+</div>
+
+
+<div class="container mt-3">
+    <h2 class="comentario">Comentarios</h2>
+    {{#each movie.review}}
+    <h5 class="card-title">{{author.username}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Puntuacion:{{rating}}</h6>
+    <p class="card-text">{{comment}}</p>
+    <hr>
+
+    {{/each}}
+</div>
