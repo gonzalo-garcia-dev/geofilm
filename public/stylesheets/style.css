@@ -6,3 +6,11 @@
 img {
   max-width: 100px;
 }
+
+#intro {
+  background-color: red;
+  background-image: url("/images/Geofilm_background.jpg");
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+}

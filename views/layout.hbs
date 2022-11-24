@@ -13,7 +13,7 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-lg bg-light mb-5">
+  <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">Geofilm</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -28,17 +28,24 @@
           <li class="nav-item">
             <a class="nav-link" href="/peliculas/listado">Listado</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/registro">Registro</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/mi-perfil">Mi perfil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/inicio-sesion">Iniciar sesión</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">Cerrar sesión</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Mi sesión
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item">
+                <a class="nav-link" href="/registro">Registrar usuario</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/inicio-sesion">Iniciar sesión</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/mi-perfil">Mi perfil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Cerrar sesión</a>
+              </li>
+            </ul>
           </li>
         </ul>
       </div>
