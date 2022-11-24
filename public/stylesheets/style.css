@@ -14,3 +14,12 @@ img {
   width: 100%;
   background-size: cover;
 }
+
+.btn-danger {
+  --bs-btn-bg: rgb(171, 14, 14);
+
+}
+
+.btn-warning {
+  --bs-btn-bg: rgb(59, 166, 98);
+}

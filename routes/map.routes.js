@@ -6,7 +6,14 @@ const Movie = require("../models/Movie.model")
 
 
 router.get('/mapa', isLoggedIn, (req, res, next) => {
-    res.render('map/movie-location')
+
+    Movie
+        .find()
+        // .select({title: 1})
+        .then(movie => {
+            res.render('map/movie-location', { movie })
+        })
+        .catch(error => { next(error) })
 
 })
 

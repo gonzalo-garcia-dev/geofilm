@@ -40,6 +40,14 @@
     </div>
 </div>
 </div>
+<div class="container">
+    {{#if isADMIN}}
+    <a href="/peliculas/editar-pelicula/{{movie._id}}" class="btn btn-warning">Editar Película</a>
+    <form action="/peliculas/eliminar-pelicula/{{movie._id}}" method="POST" style="display: inline">
+        <input type="submit" value="Eliminar película" class="btn btn-danger">
+    </form>
+    {{/if}}
+</div>
 
 
 <div class="container mt-3">

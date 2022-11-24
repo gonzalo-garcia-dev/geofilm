@@ -104,6 +104,20 @@ router.post("/editar-pelicula/:movie_id", isLoggedIn, (req, res, next) => {
         .catch(error => { next(error) })
 })
 
+//Delete movie form post
+
+
+router.post('/eliminar-pelicula/:movie_id', (req, res, next) => {
+
+    const { movie_id: id } = req.params
+
+    Movie
+        .findByIdAndDelete(id)
+        .then(() => res.redirect('/peliculas/listado'))
+        .catch(err => console.log(err))
+
+})
+
 //Search movie from api
 
 router.get("/buscar", isLoggedIn, (req, res, next) => {

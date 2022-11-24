@@ -15,6 +15,7 @@ function getMovies() {
 }
 
 
+
 function setMarkers(movies) {
 
     movies.forEach(elm => {
@@ -25,8 +26,10 @@ function setMarkers(movies) {
         new google.maps.Marker({
             map: myMap,
             position: { lat, lng },
-            title: elm.name
+            title: elm.title
+
         })
+
     })
     // //Infowindow (quitar comentario cuando funcione todo)
 
