@@ -8,6 +8,8 @@ img {
 
 }
 
+
+
 #intro {
   background-image: url("/images/Geofilm_background.jpg");
   height: 100vh;
@@ -37,4 +39,10 @@ img {
 
 .detailsCard {
   height: 650px;
+}
+
+.btn-dark {
+  --bs-btn-bg: #1d201f;
+
+
 }
