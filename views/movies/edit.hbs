@@ -2,9 +2,20 @@
 
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h1>Editar Localización{{title}}</h1>
+            <h1>Editar localización de la película "{{title}}"</h1>
 
             <form action="/peliculas/editar-pelicula/{{_id}}" method="POST">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="latitude" class="form-label">Latitud</label>
+                        <input type="text" class="form-control" id="latitude" name="latitude">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="longitude" class="form-label">Longitud</label>
+                        <input type="text" class="form-control" id="longitude" name="longitude">
+                    </div>
+                </div>
+
                 <div class="mb-3">
                     <label for="title" class="form-label">Título</label>
                     <input type="text" class="form-control" id="title" name="title" value="{{title}}">
@@ -13,71 +24,79 @@
                     <label for="director" class="form-label">Director/a</label>
                     <input type="text" class="form-control" id="director" name="director" value="{{director}}">
                 </div>
-                <div class="mb-3">
-                    <label for="year" class="form-label">Año</label>
-                    <input type="number" class="form-control" id="year" name="year" value="{{year}}">
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <label for="year" class="form-label">Año</label>
+                        <input type="number" class="form-control" id="year" name="year" value="{{year}}">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="runtimeStr" class="form-label">Duración</label>
+                        <input type="text" class="form-control" id="runtimeStr" name="runtimeStr"
+                            value="{{runtimeStr}}">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="releaseDate" class="form-label">Fecha de estreno</label>
+                        <input type="text" class="form-control" id="releaseDate" name="releaseDate"
+                            value="{{releaseDate}}">
+                    </div>
                 </div>
+
                 <div class="mb-3">
                     <label for="plotLocal" class="form-label">Sinopsis</label>
-                    <input type="text" class="form-control" id="plotLocal" name="plotLocal" value="{{movie.plotLocal}}">
+                    <input type="text" class="form-control" id="plotLocal" name="plotLocal" value="{{plotLocal}}">
                 </div>
+
                 <div class="mb-3">
                     <label for="awards" class="form-label">Premios</label>
-                    <input type="text" class="form-control" id="awards" name="awards" value="{{movie.awards}}">
+                    <input type="text" class="form-control" id="awards" name="awards" value="{{awards}}">
                 </div>
-                <div class="mb-3">
-                    <label for="runtimeStr" class="form-label">Duración</label>
-                    <input type="text" class="form-control" id="runtimeStr" name="runtimeStr"
-                        value="{{movie.runtimeStr}}">
-                </div>
-                <div class="mb-3">
-                    <label for="releaseDate" class="form-label">Fecha de estreno</label>
-                    <input type="text" class="form-control" id="releaseDate" name="releaseDate"
-                        value="{{movie.releaseDate}}">
-                </div>
+
+
                 <div class="mb-3">
                     <label for="writers" class="form-label">Guionistas</label>
-                    <input type="text" class="form-control" id="writers" name="writers" value="{{movie.writers}}">
+                    <input type="text" class="form-control" id="writers" name="writers" value="{{writers}}">
                 </div>
                 <div class="mb-3">
                     <label for="stars" class="form-label">Estrellas principales</label>
-                    <input type="text" class="form-control" id="stars" name="stars" value="{{movie.stars}}">
+                    <input type="text" class="form-control" id="stars" name="stars" value="{{stars}}">
                 </div>
-                <div class="mb-3">
-                    <label for="genres" class="form-label">Géneros</label>
-                    <input type="text" class="form-control" id="genres" name="genres" value="{{movie.genres}}">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="genres" class="form-label">Géneros</label>
+                        <input type="text" class="form-control" id="genres" name="genres" value="{{genres}}">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="imDbRating" class="form-label">Valoración de los usuarios</label>
+                        <input type="text" class="form-control" id="imDbRating" name="imDbRating"
+                            value="{{imDbRating}}">
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="imDbRating" class="form-label">Valoración de los usuarios</label>
-                    <input type="text" class="form-control" id="imDbRating" name="imDbRating"
-                        value="{{movie.imDbRating}}">
-                </div>
-                <div class="mb-3">
-                    <label for="budget" class="form-label">Presupuesto</label>
-                    <input type="text" class="form-control" id="budget" name="budget"
-                        value="{{movie.boxOffice.budget}}">
-                </div>
-                <div class="mb-3">
-                    <label for="cumulativeWorldwideGross" class="form-label">Recaudado hasta la fecha</label>
-                    <input type="text" class="form-control" id="cumulativeWorldwideGross"
-                        name="cumulativeWorldwideGross" value="{{movie.boxOffice.cumulativeWorldwideGross}}">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="budget" class="form-label">Presupuesto</label>
+                        <input type="text" class="form-control" id="budget" name="budget" value="{{budget}}">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="cumulativeWorldwideGross" class="form-label">Recaudado hasta la fecha</label>
+                        <input type="text" class="form-control" id="cumulativeWorldwideGross"
+                            name="cumulativeWorldwideGross" value="{{cumulativeWorldwideGross}}">
+                    </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="image" class="form-label">Imagen</label>
                     <input type="text" class="form-control" id="image" name="image" value="{{image}}">
                 </div>
-                <div class="mb-3">
-                    <label for="latitude" class="form-label">Latitud</label>
-                    <input type="text" class="form-control" id="latitude" name="latitude" value="{{latitude}}">
-                </div>
-                <div class="mb-3">
-                    <label for="longitude" class="form-label">Longitud</label>
-                    <input type="text" class="form-control" id="longitude" name="longitude" value="{{longitude}}">
-                </div>
+
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-dark">Actualizar</button>
+                    <button type="submit" class="btn btn-dark">Crear localización</button>
                 </div>
+
+            </form>
 
             </form>
 
