@@ -35,8 +35,6 @@ img {
   margin-top: 20px
 }
 
-.card-img-top {
-  width: 250px;
-
-
+.detailsCard {
+  height: 650px;
 }
