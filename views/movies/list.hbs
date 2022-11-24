@@ -3,23 +3,20 @@
         <section class="text-center">
             <h4 class="mb-5"><strong>Todas las películas de Geofilm</strong></h4>
 
-            <div class="row align-items-end">
+            <div class="row align-items-center">
                 {{#each movie}}
                 <div class="col-lg-3 col-md-12 mb-4">
                     <div class="card detailsCard">
                         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="dark">
-                            <img src="{{image}}" class="img-fluid" />
+                            <a href="/peliculas/detalles/{{_id}}" class="btn btn-dark"><img src="{{image}}"
+                                    class="img-fluid" /></a>
                         </div>
                         <div class="card-body">
                             <div class="d-flex justify-center">
-                                <h5 class="card-title text-center">{{title}}</h5>
+                                <p class="card-title text-center">{{title}}</p>
                                 <p class="card-text">
                                     {{description}}
                                 </p>
-                            </div>
-                            <div class="d-flex justify-content-start mt-5">
-                                <a href="/peliculas/detalles/{{_id}}" class="btn btn-dark">Ir a
-                                    detalles</a>
                             </div>
                         </div>
                     </div>

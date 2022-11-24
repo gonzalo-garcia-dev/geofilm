@@ -37,9 +37,9 @@ img {
   margin-top: 20px
 }
 
-.detailsCard {
-  height: 650px;
-}
+/* .detailsCard {
+  height: 700px;
+} */
 
 .btn-dark {
   --bs-btn-bg: #1d201f;
