@@ -1,24 +1,38 @@
-<div id="form">
-  <h2>Registro</h2>
-  <form action="/registro" method="POST">
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
 
-    <label> Username
-      <input type="text" name="username" placeholder="Your username" />
-    </label>
+      <h1>Registro</h1>
 
-    <label> Email
-      <input type="email" name="email" placeholder="Your email" />
-    </label>
+      <form action="/registro" method="POST">
+        <div class="row">
 
-    <label> Password
-      <input type="password" name="password" placeholder="Your password" />
-    </label>
+          <div class="col-md-4">
+            <label for="year" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Tu nombre">
+          </div>
 
-    <button type="submit">Registro</button>
+          <div class="col-md-4">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" class="form-control" id="email" name="email" placeholder="Tu email">
+          </div>
 
+          <div class="col-md-4">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Tu password">
+          </div>
+        </div>
 
-    {{#if errorMessage}}
-    <p class="error">{{errorMessage}}</p>
-    {{/if}}
-  </form>
+        <hr>
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-dark">Iniciar sesión</button>
+        </div>
+
+        {{#if errorMessage}}
+        <p class="error">{{errorMessage}}</p>
+        {{/if}}
+      </form>
+    </div>
+  </div>
 </div>

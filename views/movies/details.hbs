@@ -7,22 +7,6 @@
                 </div>
                 <div class="col-md-6">
                     <div class="card-body">
-                        <h1 class="card-title">{{movie.title}}</h1>
-                        <h7 class="card-title">{{movie.director}}</h7>
-                        <h5 class="card-title">{{movie.year}}</h5>
-                        <p><b>Sinópsis</b>: {{movie.plotLocal}}</p>
-                        <hr>
-                        <p><b>Premios</b>: {{movie.awards}}</p>
-                        <p><b>Duración</b>: {{movie.runtimeStr}}</p>
-                        <p><b>Fecha de estreno</b>: {{movie.releaseDate}}</p>
-                        <p><b>Guionistas</b>: {{movie.writers}}</p>
-                        <p><b>Estrellas principales</b>: {{movie.stars}}</p>
-                        <p><b>Géneros</b>: {{movie.genres}}</p>
-                        <p><b>Valoración de los usuarios</b>: {{movie.imDbRating}}</p>
-                        <p><b>Presupuesto</b>: {{movie.boxOffice.budget}}</p>
-                        <p><b>Recaudado hasta la fecha</b>: {{movie.boxOffice.cumulativeWorldwideGross}}</p>
-                        {{!-- <h5 class="card-title">{{movie.location.coordinates.[0]}}</h5>
-                        <h5 class="card-title">{{movie.location.coordinates.[1]}}</h5> --}}
 
                         {{#with movie}}
                         <h1 class="card-title">{{title}}</h1>

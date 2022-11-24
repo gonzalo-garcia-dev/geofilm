@@ -107,7 +107,7 @@ router.post("/inicio-sesion", isLoggedOut, (req, res, next) => {
           req.session.currentUser = user.toObject()
           delete req.session.currentUser.password
 
-          res.redirect("/mi-perfil")
+          res.redirect("/")
         })
         .catch((err) => next(err))
     })
