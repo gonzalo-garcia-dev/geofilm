@@ -2,7 +2,7 @@
 
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h1>Editar {{title}}</h1>
+            <h1>Editar Localización{{title}}</h1>
 
             <form action="/peliculas/editar-pelicula/{{_id}}" method="POST">
                 <div class="mb-3">
@@ -17,6 +17,52 @@
                     <label for="year" class="form-label">Año</label>
                     <input type="number" class="form-control" id="year" name="year" value="{{year}}">
                 </div>
+                <div class="mb-3">
+                    <label for="plotLocal" class="form-label">Sinopsis</label>
+                    <input type="text" class="form-control" id="plotLocal" name="plotLocal" value="{{movie.plotLocal}}">
+                </div>
+                <div class="mb-3">
+                    <label for="awards" class="form-label">Premios</label>
+                    <input type="text" class="form-control" id="awards" name="awards" value="{{movie.awards}}">
+                </div>
+                <div class="mb-3">
+                    <label for="runtimeStr" class="form-label">Duración</label>
+                    <input type="text" class="form-control" id="runtimeStr" name="runtimeStr"
+                        value="{{movie.runtimeStr}}">
+                </div>
+                <div class="mb-3">
+                    <label for="releaseDate" class="form-label">Fecha de estreno</label>
+                    <input type="text" class="form-control" id="releaseDate" name="releaseDate"
+                        value="{{movie.releaseDate}}">
+                </div>
+                <div class="mb-3">
+                    <label for="writers" class="form-label">Guionistas</label>
+                    <input type="text" class="form-control" id="writers" name="writers" value="{{movie.writers}}">
+                </div>
+                <div class="mb-3">
+                    <label for="stars" class="form-label">Estrellas principales</label>
+                    <input type="text" class="form-control" id="stars" name="stars" value="{{movie.stars}}">
+                </div>
+                <div class="mb-3">
+                    <label for="genres" class="form-label">Géneros</label>
+                    <input type="text" class="form-control" id="genres" name="genres" value="{{movie.genres}}">
+                </div>
+                <div class="mb-3">
+                    <label for="imDbRating" class="form-label">Valoración de los usuarios</label>
+                    <input type="text" class="form-control" id="imDbRating" name="imDbRating"
+                        value="{{movie.imDbRating}}">
+                </div>
+                <div class="mb-3">
+                    <label for="budget" class="form-label">Presupuesto</label>
+                    <input type="text" class="form-control" id="budget" name="budget"
+                        value="{{movie.boxOffice.budget}}">
+                </div>
+                <div class="mb-3">
+                    <label for="cumulativeWorldwideGross" class="form-label">Recaudado hasta la fecha</label>
+                    <input type="text" class="form-control" id="cumulativeWorldwideGross"
+                        name="cumulativeWorldwideGross" value="{{movie.boxOffice.cumulativeWorldwideGross}}">
+                </div>
+
                 <div class="mb-3">
                     <label for="image" class="form-label">Imagen</label>
                     <input type="text" class="form-control" id="image" name="image" value="{{image}}">

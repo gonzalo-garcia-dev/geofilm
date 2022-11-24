@@ -9,6 +9,26 @@ const movieSchema = new Schema(
 
     year: Number,
 
+    plotLocal: String,
+
+    awards: String,
+
+    runtimeStr: String,
+
+    releaseDate: String,
+
+    writers: String,
+
+    stars: String,
+
+    genres: String,
+
+    imDbRating: String,
+
+    budget: String,
+
+    cumulativeWorldwideGross: String,
+
     image: String,
 
     location: {
