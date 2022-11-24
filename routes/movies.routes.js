@@ -25,7 +25,7 @@ router.get("/listado", isLoggedIn, (req, res, next) => {
 router.post("/crear-pelicula", isLoggedIn, (req, res, next) => {
 
     let { _id: user } = req.session.currentUser
-    const { title, director, year, image, latitude, longitude } = req.body
+    const { title, director, year, plotLocal, awards, runtimeStr, releaseDate, writers, stars, genres, imDbRating, budget, cumulativeWorldwideGross, image, latitude, longitude } = req.body
 
     const location = {
         type: 'Point',
@@ -33,11 +33,12 @@ router.post("/crear-pelicula", isLoggedIn, (req, res, next) => {
     }
 
     Movie
-        .create({ title, director, year, image, location, user })
+        .create({ title, director, year, plotLocal, awards, runtimeStr, releaseDate, writers, stars, genres, imDbRating, budget, cumulativeWorldwideGross, image, location, user })
         .then(() => {
             res.redirect(`/peliculas/listado`)
         })
         .catch(error => { next(error) })
+
 })
 
 //Movies details RENDER
@@ -51,7 +52,6 @@ router.get("/detalles/:movie_id", (req, res, next) => {
         .populate('user')
         .populate({ path: 'review', populate: { path: 'author' } })
         .then(movie => {
-            console.log('estoy populada?', movie)
             res.render('movies/details', {
                 movie,
                 isADMIN: req.session.currentUser.role === 'ADMIN'
@@ -68,7 +68,7 @@ router.get("/editar-pelicula/:movie_id", isLoggedIn, (req, res, next) => {
     Movie
         .findById(id)
         .then(movie => {
-            const { _id, title, director, year, image } = movie
+            const { _id, title, director, year, plotLocal, awards, runtimeStr, releaseDate, writers, stars, genres, imDbRating, budget, cumulativeWorldwideGross, image } = movie
             const latitude = movie.location.coordinates[0]
             const longitude = movie.location.coordinates[1]
             movie = {
@@ -76,6 +76,16 @@ router.get("/editar-pelicula/:movie_id", isLoggedIn, (req, res, next) => {
                 title,
                 director,
                 year,
+                plotLocal,
+                awards,
+                runtimeStr,
+                releaseDate,
+                writers,
+                stars,
+                genres,
+                imDbRating,
+                budget,
+                cumulativeWorldwideGross,
                 image,
                 latitude,
                 longitude
@@ -92,14 +102,14 @@ router.get("/editar-pelicula/:movie_id", isLoggedIn, (req, res, next) => {
 router.post("/editar-pelicula/:movie_id", isLoggedIn, (req, res, next) => {
 
     const { movie_id: id } = req.params
-    const { title, director, year, image, latitude, longitude } = req.body
+    const { title, director, year, plotLocal, awards, runtimeStr, releaseDate, writers, stars, genres, imDbRating, budget, cumulativeWorldwideGross, image, latitude, longitude } = req.body
     const location = {
         type: 'Point',
         coordinates: [latitude, longitude]
     }
 
     Movie
-        .findByIdAndUpdate(id, { title, director, year, image, location })
+        .findByIdAndUpdate(id, { title, director, year, plotLocal, awards, runtimeStr, releaseDate, writers, stars, genres, imDbRating, budget, cumulativeWorldwideGross, image, location })
         .then(() => res.redirect(`/peliculas/detalles/${id}`))
         .catch(error => { next(error) })
 })
