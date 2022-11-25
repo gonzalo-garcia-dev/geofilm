@@ -7,7 +7,7 @@
         <div class="col-md-6 ">
 
 
-            <figure id="myMap"></figure>
+            <figure id="myMap" class="mapBorder"></figure>
 
         </div>
 
@@ -15,8 +15,8 @@
             <div class="row ">
                 {{#each movie}}
 
-                <div class="col-md-3 text-center ">
-                    <img src="{{image}}" alt="{{title}}">
+                <div class="col-md-3 text-center">
+                    <img class="mapImage" src="{{image}}" alt="{{title}}">
                     <p>{{title}}</p>
                     <a href="/peliculas/detalles/{{_id}}" class="btn btn-dark bt-sm">Detalles</a>
                 </div>

@@ -34,7 +34,16 @@ img {
   width: 200px;
   justify-content: space-between;
   padding-inline: 20px;
-  margin-top: 20px
+  margin-top: 20px;
+
+}
+
+.mapImage {
+  border-radius: 5px;
+}
+
+.mapBorder {
+  border-radius: 15px;
 }
 
 /* .detailsCard {
