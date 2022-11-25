@@ -28,30 +28,28 @@
           <li class="nav-item">
             <a class="nav-link" href="/peliculas/listado">Listado</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Mi sesión
-            </a>
-            <ul class="dropdown-menu">
-              <li class="nav-item">
-                <a class="nav-link" href="/registro">Registrar usuario</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/inicio-sesion">Iniciar sesión</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/mi-perfil">Mi perfil</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/logout">Cerrar sesión</a>
-              </li>
-            </ul>
+
+          {{#unless nameUser}}
+          <li class="nav-item">
+            <a class="nav-link" href="/registro">Registrar usuario</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/inicio-sesion">Iniciar sesión</a>
+          </li>
+          {{/unless}}
+          {{#if nameUser}}
+          <li class="nav-item">
+            <a class="nav-link" href="/mi-perfil">Mi perfil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Cerrar sesión</a>
+          </li>
+          {{/if}}
           </li>
         </ul>
       </div>
     </div>
   </nav>
-
   {{{body}}}
 
   <!-- JavaScript Bundle with Popper -->
