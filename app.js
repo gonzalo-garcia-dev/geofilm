@@ -12,10 +12,14 @@ const projectName = "Geogilm"
 
 app.locals.appTitle = `${capitalize(projectName)} created with IronLauncher`
 app.use((req, res, next) => {
+    console.log('soy el usuario???!', req.session.currentUser)
+
     if (req.session.currentUser) {
-        app.locals.nameUser = req.session.currentUser.username
+        app.locals.currentUserId = req.session.currentUser._id
+        app.locals.username = req.session.currentUser.username
     } else {
-        app.locals.nameUser = null
+        app.locals.currentUserId = null
+        app.locals.username = null
     }
     next()
 })
