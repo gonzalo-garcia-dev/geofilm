@@ -18,6 +18,8 @@ router.post("/registro", isLoggedOut, (req, res) => {
   const { username, email, simplepassword } = req.body
 
 
+
+
   bcrypt
     .genSalt(saltRounds)
     .then(salt => {
